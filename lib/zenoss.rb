@@ -149,6 +149,15 @@ module Zenoss
     str
   end
 
+  # Attempt to retrieve a version string from the Zenoss server. This
+  # method is based on screen scraping rather than a published API, so
+  # it's not advised to rely on it.
+  #
+  # @return [String] version number, such as "3.2.1"
+  def zenoss_server_version
+    @httpcli.get("#{@zenoss_uri}/About/zenossVersions")
+      .body.match(/\>Zenoss (\d+\.[\d\.]*)\</) { |md| return md[1] }
+  end
 end # Zenoss
 
 require 'zenoss/connection'

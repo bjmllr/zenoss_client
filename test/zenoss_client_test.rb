@@ -108,6 +108,10 @@ describe Zenoss do
     report_types.key?('reportTypes').must_equal true
   end
 
+  it 'fetches a Zenoss version string' do
+    @zen.zenoss_server_version.must_equal "4.2.5"
+  end
+
   it 'renames the device' do
     TEMPORARY_DEVICE_NAME = 'unit_test_temporary_device_name'
     begin
